@@ -3,3 +3,12 @@ git config --global user.name "Frank"
 git config --global user.email "2369602563@qq.com"
 git config --list
 git config user.name
+要关联一个远程仓库，先使用命令git remote add origin git@github.com:bdcncdcdvd/learning.git
+关联后，使用命令git push -u origin master
+之后每次提交使用git push origin master 即可。
+git branch -M main//将本地的master分支改名字为main
+git branch -a//查看所有的分支，包括远端的分支
+git branch -r//仅查看远端分支
+同步远程分支
+git fetch//将本地分支与远程分支保持同步
+git checkout -b note origin/note
