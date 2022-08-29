@@ -1,0 +1,5 @@
+one day
+git config --global user.name "Frank"
+git config --global user.email "2369602563@qq.com"
+git config --list
+git config user.name
