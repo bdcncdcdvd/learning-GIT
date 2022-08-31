@@ -54,6 +54,7 @@ git remote add 的配置表示什么意思？
 然后git merge时，它会把ref/remote/origin目录下的对应分支合并到refs/heads/目录下对应分支上。
 origin究竟是什么呢？
 origin就是一个别名（名称），用于指向远程仓库。
+git remote add  <remote-name> <repo-address>//新增远程名称
 git remote rm <remote_name>//删除已存在的远程名称（只会移除本地仓库与远程仓库的管理，不会删除远程仓库的代码）
 git remote set_url <remote_name> <repo_address>//更新远程名称关联的远程仓库
 git remote rename <old-remote-name> <new-remote-name>
@@ -65,3 +66,33 @@ git remote show 主机名  可以查看该主机名的详细信息
 常说的[远程分支]是是远程仓库对应的分支在本地的一个副本。比如常见的origin/master、origin/develop
 等都是远程分支。
 可以在.git/refs/remotes/目录上看到
+
+three day
+git push origin main==git push git@github.com:tofrankie/repo-demo.git main 
+git push origin serverfix解析
+Git自动将serverfix分支展开为ref/heads/serverfix:refs/heads/serverfix
+意味着推送本地的serverfix分支来更新远程仓库上的serverfix分支
+git push origin serverfix:awesomebranch//将本地的Serverfix分支推送到远程仓库的awesomebranch上
+下次其他作者从远程服务器上抓取数据时，他们会在本地生成一个远程分支origin/serverfix,指向服务器的serverfix
+分支的引用：git fetch origin
+注意：当抓取到新的远程跟踪分支时，本地不会自动生成一个可编辑的副本。换句话说，这种情况下，不会有一个新的
+serverfix分支-只有一个不可修改的origin/serverfix指针。
+可以运行git merge origin/serverfix将这些工作合并到当前所在的分支。如果想要在自己的serverfix上工作，可以
+将其建立在远程跟踪分支的之上：git checkout -b serverfix origin/serverfix
+这会给你一个用于工作的本地分支，并且起点位于origin/serverfix
+跟踪分支
+从一个远程跟踪分支检出一个本地分支会自动创建所谓的“跟踪分支”（它跟踪的分支叫作“上游分支”）
+跟踪分支是与远程分支有直接联系的本地分支。如果在一个跟踪分支基础上输入git pull Git能自动识别去哪个服务器
+上抓取、合并到哪个分支。
+当克隆一个仓库时，它通常会自动创建一个跟踪origin/master的master分支
+git branch -vv//查看设置的所有跟踪分支，这回将所有的本地分支列出来并且包含更多的信息
+如每一个分支正在跟踪哪一个远程分支与本地分支是否领先、或是落后或是都有。
+$ git branch -vv
+  iss53     7e424c3 [origin/iss53: ahead 2] forgot the brackets
+  master    1ae2a45 [origin/master] deploying index fix
+* serverfix f8674d9 [teamone/server-fix-good: ahead 3, behind 1] this should do it
+  testing   5ea463a trying something new
+  可以看到iss53分支正在跟踪origin/iss53,并且ahead是2，意味着本地有两个提交还没有推送到服务器上
+  master分支正在跟踪origin/master分支并且是最新的
+  serverfix分支正在跟踪teamone服务器上的server-fix-good分支并且领先3落后1意味着
+  服务器上有一次提交还没还没有合并入同时本地还有三次提交没有推送
