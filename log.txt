@@ -94,5 +94,26 @@ $ git branch -vv
   testing   5ea463a trying something new
   可以看到iss53分支正在跟踪origin/iss53,并且ahead是2，意味着本地有两个提交还没有推送到服务器上
   master分支正在跟踪origin/master分支并且是最新的
-  serverfix分支正在跟踪teamone服务器上的server-fix-good分支并且领先3落后1意味着
+  serverfix分支正在跟踪teamone服务器上的server-fix-good分支并且领先3落后1意味着领先与落后数字，需要在运行
+  此命令前抓取所有的远程仓库
+  可以这样做：
+  git fetch --all
+  git branch -vv
+  注意，这些数字的值来自于你从每个服务器上最后一次抓取的数据。这个命令并没有连接服务器，他只会告诉你
+  关于本地缓存的的服务器数据，如果想要统计最新的
   服务器上有一次提交还没还没有合并入同时本地还有三次提交没有推送
+  testing分支没有跟踪任何远程分支
+  远程跟踪分支是远程分支的状态的引用，他们是你无法移动的本地引用。进行了网络通信后，Git就会为你移动他们
+  已精确反映远程分支的状态。请将他们看做是书签，这样可以提醒你该分支在远程仓库中的位置就是你最后
+  一次连接到他们的位置。
+  通过git fetch 拉取代码的过程：先读取.git/config文件里面的配置[remote/<remote-name>]
+  ,将里面的所有远程名称对应仓库的分支下载到本地，放在.git/refs/remotes/<remote-name>目录下。
+  比如git fetch origin main 会创建或更新.git/refs/remotes/origin/main的文件。注意：
+  我们使用的是origin/main而不是remotes/origin/main
+  有时通过命令git diff main origin/main来对比本地分支与远程分支的一些信息，才决定要不要合并。
+  通过git merge或git rebase 来进行合并分支。比如git merge origin/main表示将远程分支Origin/main合并至本地分支main中。
+  git fetch 不会修改本地分支的代码
+  
+  其实Git的分支是由一个或多个commit-ID组成的集合。通过git branch 命令创建的分支，只是对某个commit-ID的引用。
+  因此，使用git branch -d 删除某个本地分支ID，也只是删除某个引用而已，并不会删除任何commit-ID 
+  
