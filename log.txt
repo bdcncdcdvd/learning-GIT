@@ -116,4 +116,7 @@ $ git branch -vv
   
   其实Git的分支是由一个或多个commit-ID组成的集合。通过git branch 命令创建的分支，只是对某个commit-ID的引用。
   因此，使用git branch -d 删除某个本地分支ID，也只是删除某个引用而已，并不会删除任何commit-ID 
+   
+  four day
+  git rebase 的用法
   
