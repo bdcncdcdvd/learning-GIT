@@ -119,4 +119,5 @@ $ git branch -vv
    
   four day
   git rebase 的用法
-  
+  合理使用rebase命令可以使我们的提交历史干净、简洁！
+  合并多个commit为一个完整的commit
