@@ -123,4 +123,8 @@ $ git branch -vv
   合并多个commit为一个完整的commit
   git rebase -i [startpoint] [endpoint]
   其中-i的意思是interactive,即弹出交互式的界面让用户编辑完成合并工作，如果不指定[endpoint]
-  ,则该区间的终点默认是当前分支HEAD所指向的commit
+  ,则该区间的终点默认是当前分支HEAD所指向的commit 
+  
+  five day
+  git reset --hard commit-ID
+  git revert commit-ID
